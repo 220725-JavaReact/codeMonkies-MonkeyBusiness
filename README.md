@@ -7,6 +7,7 @@ Play an assortment of Monkey Games! Such as Blackjack- Roulette - Dice - Texas H
 Brandon Learned
 Trenton Teasdale
 Anthony Baraja
+Donato Manzione
 
 ## Features
 - Game of blackjack
