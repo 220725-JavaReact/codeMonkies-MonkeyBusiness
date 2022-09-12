@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.revature.codemonkies.models.User;
 import com.revature.codemonkies.repos.UserRepository;
 
-@Service("userService")
+@Service
 public class UserService{
 
 	private UserRepository userRepository;
