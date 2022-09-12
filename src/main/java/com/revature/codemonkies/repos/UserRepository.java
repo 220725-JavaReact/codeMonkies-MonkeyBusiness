@@ -10,4 +10,5 @@ public interface UserRepository extends JpaRepository<User, Integer>{ //model an
 	
 	public User findByUserName(String userName);
 	public <S extends User> S save(User user);
+	
 }

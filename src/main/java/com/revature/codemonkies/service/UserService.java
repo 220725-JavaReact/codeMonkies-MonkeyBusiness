@@ -22,6 +22,7 @@ public class UserService{
 	
 	public void save(User user) {
 		this.userRepository.save(user);
+		System.out.println(user.toString());
 	}
 
 }

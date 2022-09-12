@@ -26,6 +26,14 @@ public class User {
 		super();
 	}
 	
+	public User(int id, String userName, String password, int bananas) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.password = password;
+		this.bananas = bananas;
+	}
+	
 	public User(String userName, String password, int bananas) {
 		super();
 		this.userName = userName;
@@ -33,6 +41,15 @@ public class User {
 		this.bananas = bananas;
 	}
 	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getUserName() {
 		return userName;
 	}
