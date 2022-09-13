@@ -63,8 +63,15 @@ code {
 .menuBtn {
   height: 50px;
   width: 400px;
+  border: 5px solid white;
   border-radius: 20px;
-  border: none;
-  font-size: large;
+  margin: 5px 5px;
+  background-color: #308834;
+  color: white;
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+.menuBtn:hover {
   cursor: pointer;
+  box-shadow: 0px 0px 15px 1px rgba(255, 255, 255, 0.5);
 }

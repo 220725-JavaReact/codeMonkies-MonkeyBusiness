@@ -7,7 +7,7 @@ import Blackjack from './components/Games/Blackjack'
 function App() {
 
     const isUserLoggedIn = true;
-    let game = Blackjack;
+    let game = null;
     let view;
     if (!isUserLoggedIn) {
       view = <Login/>;
@@ -15,7 +15,7 @@ function App() {
       view = <Menu/>;
     }
     if (isUserLoggedIn && game === Blackjack){
-      view = <Blackjack/>
+      // view = <Blackjack/>
     }
     return (
       <div className="App">
