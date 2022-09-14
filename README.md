@@ -1,6 +1,6 @@
 # codeMonkies-MonkeyBusiness
 ### Description
-A Monkey Casino Game Table! Play Cards, Bet Your Hard Earned Bananas, and Fling Some Monkey Droppings!
+A Monkey Casino Game Table! Play Cards, Bet Your Hard Earned Bananas, and Experience Monkey Tantrums when you lose!
 Play an assortment of Monkey Games! Such as Blackjack- Roulette - Dice - Texas Hold Em'
 
 ## Team Members:
