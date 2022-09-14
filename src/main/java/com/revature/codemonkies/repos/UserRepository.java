@@ -9,6 +9,5 @@ import com.revature.codemonkies.models.User;
 public interface UserRepository extends JpaRepository<User, Integer>{ //model and pk type
 	
 	public User findByUserName(String userName);
-	public <S extends User> S save(User user);
 	
 }

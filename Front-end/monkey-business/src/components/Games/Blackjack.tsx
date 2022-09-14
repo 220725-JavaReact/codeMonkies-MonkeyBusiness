@@ -1,8 +1,10 @@
 import './Blackjack.css'
 import back from '../../images/BananaBack.png';
 
-function Blackjack(){
+let userName:string;
 
+function Blackjack({userName}:any){
+    console.log(userName);
     return <div className='blackjack'>
 
     <div className='controls'>
