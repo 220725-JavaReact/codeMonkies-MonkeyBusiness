@@ -3,6 +3,7 @@ import './App.css';
 import Login from './components/Login/Login';
 import Menu from './components/Menu'
 import Blackjack from './components/Games/Blackjack'
+import Dice from './components/Games/Dice'
 import { isConstructorDeclaration } from 'typescript';
 import { IUser } from './models/User';
 import { AppService } from './services/app.service';
