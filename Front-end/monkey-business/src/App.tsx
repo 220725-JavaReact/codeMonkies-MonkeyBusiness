@@ -42,15 +42,8 @@ function App() {
     }
 
     if (isUserLoggedIn && game === "Blackjack"){
-<<<<<<< HEAD
-      return <Blackjack userName={userName}/>
-    } else if (isUserLoggedIn && game === "Dice"){
-      return <Dice userName={userName}/>
-    }else if (!isUserLoggedIn) {
-=======
       return <Blackjack userName={user?.userName}/>
     } else if (!isUserLoggedIn) {
->>>>>>> 019ac8caa82fe7f136f98408ffcea6ff30e8bdbf
       return <Login 
         verify={verify} 
         message={message}
