@@ -1,4 +1,5 @@
 import { UserLog } from "../models/UserLog";
+import Blackjack from "./Games/Blackjack";
 
 interface Props {
     game:string;
