@@ -9,6 +9,14 @@
     flex-direction: column;
     justify-content: flex-end; */
 }
+.blackjackW{
+    background-image: url("../../images/wink.png");
+	background-repeat: no-repeat;
+	background-position: center;
+    height: 100vh;
+    width: 100vw;
+	overflow: hidden;
+}
 .table {
 	position: absolute;
 	display: flex;
@@ -56,6 +64,7 @@
     flex-direction: column;
     align-items: center;
     border-bottom-right-radius: 20px;
+    padding: 20px 0;
 }
 .userMenu img {
     max-width: 50%;
@@ -116,6 +125,10 @@
     width: 20px;
     border-radius: 100%;
     background-color: black;
+}
+.two {
+    display: flex;
+    gap: 4rem;
 }
 .three{
     display: flex;
