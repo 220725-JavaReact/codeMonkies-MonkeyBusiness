@@ -5,32 +5,48 @@ import Menu from './components/Menu'
 import Blackjack from './components/Games/Blackjack'
 import { isConstructorDeclaration } from 'typescript';
 import { IUser } from './models/User';
+import { AppService } from './services/app.service';
+import axios from 'axios';
 
 function App() {
 
+    const appServie = new AppService();
+
     const[isUserLoggedIn, setLog] = useState<boolean>(false);
-    const[userName, setUser] = useState<string>("");
-    const[bananas, setBananas] = useState<number>(1);
     const[game, setGame] = useState<string>("");
     const[view, setView] = useState<any>();
     const[user, setIUser] = useState<IUser>();
+    const[message, setMessage] = useState<string>("");
 
+    async function verify(userName:string, password:string,e:React.ChangeEvent<HTMLFormElement>) {
+      e.preventDefault();
+      axios.get<IUser>(`http://monkeybusiness2-env.eba-6xppmvak.us-east-1.elasticbeanstalk.com/user/username?username=${userName}`)
+            .then( response => {
+              if(response.data){
+                if(response.data.password === password){
+                  console.log("success")
+                  setMessage("")
+                  setIUser(response.data)
+                  setLog(true);
+                } else {
+                  console.log("incorrect password")
+                  setMessage("Incorrect Username or Password")
 
-    //connect to rest
-    //set data to game menu
-    function verify(userName:string, password:string){
-      //if data good, update,
-      //if data bad, print message somehow
-      console.log("verify called");
-      setUser("blearned");
-      setLog(true);
+                }
+              } else {
+                console.log("no data")
+                setMessage("Incorrect Username or Password")
+              }
+            })      
     }
 
     if (isUserLoggedIn && game === "Blackjack"){
-      return <Blackjack userName={userName}/>
+      return <Blackjack userName={user?.userName}/>
     } else if (!isUserLoggedIn) {
       return <Login 
-        verify={verify} />
+        verify={verify} 
+        message={message}
+        setMessage={setMessage}/>
     } else {
       return <Menu 
         isUserLoggedIn={isUserLoggedIn} 
@@ -40,14 +56,14 @@ function App() {
         />;
     }
 
-    if (isUserLoggedIn && game === "Blackjack"){
-      <Blackjack/>
-    }
-    return (
-      <div className="App">
-       {view}
-      </div>
-    );
+    // if (isUserLoggedIn && game === "Blackjack"){
+    //   <Blackjack/>
+    // }
+    // return (
+    //   <div className="App">
+    //    {view}
+    //   </div>
+    // );
 }
 
 export default App;
