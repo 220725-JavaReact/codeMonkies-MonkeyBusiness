@@ -9,6 +9,7 @@ body {
   height: 100vh;
   width: 100vw;
 overflow: hidden;
+z-index: -100;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -70,6 +71,7 @@ code {
   color: white;
   font-weight: 900;
   font-size: 1.5rem;
+  z-index: 5;
 }
 .menuBtn:hover {
   cursor: pointer;
