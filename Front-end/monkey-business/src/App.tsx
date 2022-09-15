@@ -3,6 +3,7 @@ import './App.css';
 import Login from './components/Login/Login';
 import Menu from './components/Menu'
 import Blackjack from './components/Games/Blackjack'
+import Dice from './components/Games/Dice'
 import { isConstructorDeclaration } from 'typescript';
 import { IUser } from './models/User';
 
@@ -28,7 +29,9 @@ function App() {
 
     if (isUserLoggedIn && game === "Blackjack"){
       return <Blackjack userName={userName}/>
-    } else if (!isUserLoggedIn) {
+    } else if (isUserLoggedIn && game === "Dice"){
+      return <Dice userName={userName}/>
+    }else if (!isUserLoggedIn) {
       return <Login 
         verify={verify} />
     } else {

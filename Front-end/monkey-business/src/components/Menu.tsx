@@ -13,7 +13,7 @@ function Menu({isUserLoggedIn, setLog, game, setGame}:ICombined){
         <div className="menu">
             <button className="menuBtn" onClick={(e)=>setGame("Blackjack")}>Blackjack</button>
             <button className="menuBtn">Coming Soon</button>
-            <button className="menuBtn">Coming Soon</button>
+            <button className="menuBtn" onClick={(e)=>setGame("Dice")}>Dice</button>
             <button className="menuBtn">Coming Soon</button>
         </div>
         <button onClick={(e)=>setLog(false)}>Log Out</button>
