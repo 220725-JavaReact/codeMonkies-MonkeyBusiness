@@ -1,10 +1,62 @@
 import './Blackjack.css'
 import back from '../../images/BananaBack.png';
+import { IDeckOfCards } from '../../models/DeckOfCards';
+import SetBet from '../Games/SetBet/SetBet';
+import { useState } from "react";
+import axios from 'axios';
+import { ICards } from '../../models/Cards';
+import { ICard } from '../../models/Card';
 
 let userName:string;
 
 function Blackjack({userName}:any){
     console.log(userName);
+
+    // Hard Code deck of cards, need to replace with api call (api/deck/new/shuffle)
+    const cardDeck1: IDeckOfCards = {
+        success: true,
+        deck_id: "bx1eu5s07ggj",
+        remaining: 52,
+        shuffled: true
+    }
+
+    const cardPick1: ICard = {
+        code: "",
+        image: "",
+        value: 0,
+        suit: ""
+    }
+
+    // Soft Code deck of Cards
+    function getCard(){//e: React.FormEvent<HTMLFormElement
+        //e.preventDefault();
+
+        axios.get<ICards>('https://www.deckofcardsapi.com/api/deck/bx1eu5s07ggj/draw/?count=1')
+            .then(response => {
+                console.log(response.data.cards);
+                //cardPick1.code = response.data.cards.code;
+            })
+
+
+    }
+
+    // Default Bet set to minimum bet 5 bannanas
+    const playerBet = 5;
+
+    // Game Buttons display condition based on game state
+    const [gameStart, setStart] = useState(false);
+    function startGame(){
+        setStart(!gameStart);
+    }
+    const displayButtons = (
+        <div>
+            { gameStart ? 
+                (<div><button onClick={getCard}>Hit</button><button>Stand</button></div>) : 
+                (<div><SetBet /><button onClick={startGame}>Start Game</button></div>)
+            }
+        </div>
+    );
+
     return <div className='blackjack'>
 
     <div className='controls'>
@@ -21,8 +73,11 @@ function Blackjack({userName}:any){
                 <p>PLAYER NUMBER</p>
             </div>
             <div className='dialog'>
-            <button>BET</button>
-            <button>QUIT</button>
+                
+                {displayButtons}
+
+            {/*<button>BET</button>
+            <button>Start Game</button>*/}
              {/* <button>DOUBLE DOWN</button>
             <button>SPLIT</button> */}
             </div>
@@ -31,14 +86,10 @@ function Blackjack({userName}:any){
     <div className="table">
         <div className="cards">
             <div className ="dealer-hand" id="dealer-cards">
-            <img src='https://deckofcardsapi.com/static/img/4H.png' alt="dealer card back"  className="card"/>
-            <img src={back} alt="dealer card back"  className="card dealer-card"/>
+                {/* Enter Dealer's cards here */}
             </div>
             <div className ="hand" id="cards">
-                <img src='https://deckofcardsapi.com/static/img/6D.png' alt="dealer card back"  className="card"/>
-                <img src='https://deckofcardsapi.com/static/img/7H.png' alt="dealer card back" className="card"/>
-                <img src='https://deckofcardsapi.com/static/img/7H.png' alt="dealer card back" className="card"/>
-                <img src='https://deckofcardsapi.com/static/img/7H.png' alt="dealer card back" className="card"/>
+                {/* Enter Player's cards here */}
             </div>
         </div>
     </div>
@@ -46,4 +97,14 @@ function Blackjack({userName}:any){
 
         </div>
 }
+/*
+<img src='https://deckofcardsapi.com/static/img/4H.png' alt="dealer card back"  className="card"/>
+<img src={back} alt="dealer card back"  className="card dealer-card"/>
+
+<img src='https://deckofcardsapi.com/static/img/6D.png' alt="dealer card back"  className="card"/>
+<img src='https://deckofcardsapi.com/static/img/7H.png' alt="dealer card back" className="card"/>
+<img src='https://deckofcardsapi.com/static/img/7H.png' alt="dealer card back" className="card"/>
+<img src='https://deckofcardsapi.com/static/img/7H.png' alt="dealer card back" className="card"/>
+*/
+
 export default Blackjack;
