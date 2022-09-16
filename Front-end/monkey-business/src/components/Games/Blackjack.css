@@ -38,10 +38,7 @@
 .hand{
     height: 160px;
 }
-
-.dealer-hand{
-    height: 160px;
-}
+﻿
 .dealer-card{
 	transform: rotate(180deg);
 	height: fit-content;
@@ -96,6 +93,10 @@
     color: white;
     font-weight: 900;
     justify-content: center;
+}
+.dialog form {
+    display: flex;
+    flex-direction: column;
 }
 #betDisplay {
     color: rgb(240, 12, 12);

@@ -59,6 +59,7 @@ code {
 }
 .menu {
   display: flex;
+  width: 90%;
   gap: 10%;
 }
 .menuBtn {
