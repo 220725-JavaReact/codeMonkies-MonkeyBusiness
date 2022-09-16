@@ -16,7 +16,11 @@ function App() {
     const[isUserLoggedIn, setLog] = useState<boolean>(false);
     const[game, setGame] = useState<string>("");
     const[view, setView] = useState<any>();
-    const[user, setIUser] = useState<IUser>();
+    const[user, setIUser] = useState<IUser>({
+      userName:"",
+      password:"",
+      bananas:500
+    });
     const[message, setMessage] = useState<string>("");
 
     async function verify(userName:string, password:string,e:React.ChangeEvent<HTMLFormElement>) {
@@ -44,7 +48,7 @@ function App() {
     if (isUserLoggedIn && game === "Blackjack"){
       return <Blackjack userName={user?.userName}/>
     } else if (isUserLoggedIn && game === "Dice"){
-      return <Dice userName={user?.userName}/>
+      return <Dice user={user} setIUser={setIUser} game={game} setGame={setGame}/>
     }else if (!isUserLoggedIn) {
       return <Login 
         verify={verify} 
@@ -52,10 +56,13 @@ function App() {
         setMessage={setMessage}/>
     } else {
       return <Menu 
-        isUserLoggedIn={isUserLoggedIn} 
+        loginStatus={isUserLoggedIn} 
         setLog={setLog}
         game={game}
         setGame={setGame}
+        user={user}
+        setUSer={setIUser}
+
         />;
     }
 

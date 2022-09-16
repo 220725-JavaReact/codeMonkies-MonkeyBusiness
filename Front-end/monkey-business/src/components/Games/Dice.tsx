@@ -1,8 +1,16 @@
 import { useState } from 'react';
+import { IUser } from '../../models/User';
 import './Blackjack.css'
 
+type DiceProps = {
+    user:IUser,
+    setIUser:React.Dispatch<React.SetStateAction<IUser>>,
+    game:string,
+    setGame:React.Dispatch<React.SetStateAction<string>>
+}
 
-function Dice({userName}:any){
+
+function Dice(Props:DiceProps){
 
     const[activeBet, setActiveBet] = useState<boolean>(false);
     const[currentBet, setBet] = useState<number>(0);
@@ -12,7 +20,7 @@ function Dice({userName}:any){
     const[dice2, setDice2] = useState<number>(0);
     const[d1Class, set1Class]= useState<string>('one');
     const[d2Class, set2Class] = useState<string>('one');
-    const[bananas, setBananas] = useState<number>(100);
+    const[bananas, setBananas] = useState<number>(Props.user.bananas);
     const[background, setBackground] = useState<string>('blackjack');
 
     function betAmount(e:any){
@@ -71,8 +79,12 @@ function Dice({userName}:any){
     <div className='controls'>
         <div className='userMenu'>
             <img src="https://pluspng.com/img-png/user-png-icon-big-image-png-2240.png" alt="user Icon"/>
-            <p>{userName}</p>
+            <p>{Props.user.userName}</p>
             <p>Bananas Left: {bananas}</p>
+            <input type="button" value="Return to Game Selection" onClick={()=> {
+                Props.setIUser({id:Props.user.id,userName:Props.user.userName,password:Props.user.password,bananas:bananas});
+                Props.setGame("")
+                }}></input>
         </div>
         <div className='gameControls'>
             
