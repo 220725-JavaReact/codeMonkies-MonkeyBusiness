@@ -92,7 +92,7 @@ function Dice(Props:DiceProps){
             {!activeBet
                 && <div className='dialog'>
                 <button id='btn1' onClick={() => {setActiveBet(true); setBetting(true)}}>BET</button>
-                <button onClick={() => setActiveBet(false)}>QUIT</button>
+                <button onClick={() => {setActiveBet(false); setBetting(false)} }>QUIT</button>
                 </div>
                }
             {betting
@@ -100,7 +100,7 @@ function Dice(Props:DiceProps){
                 <form onSubmit={(e) =>bet(e)}>
                 <input className="bet" type="number" onChange={betAmount} placeholder="BET AMOUNT"></input>
                 </form>
-                <button onClick={() => setActiveBet(false)}>QUIT</button>
+                <button onClick={() => {setActiveBet(false); setBetting(false)}}>QUIT</button>
                 </div>
                }
             {(!betting && currentBet >0) &&
