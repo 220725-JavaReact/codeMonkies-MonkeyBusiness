@@ -81,7 +81,7 @@ function Dice(Props:DiceProps){
             <img src="https://pluspng.com/img-png/user-png-icon-big-image-png-2240.png" alt="user Icon"/>
             <p>{Props.user.userName}</p>
             <p>Bananas Left: {bananas}</p>
-            <input type="button" value="Return to Game Selection" onClick={()=> {
+            <input className="userMenuBtn" type="button" value="Return to Game Selection" onClick={()=> {
                 Props.setIUser({id:Props.user.id,userName:Props.user.userName,password:Props.user.password,bananas:bananas});
                 Props.setGame("")
                 }}></input>
@@ -98,19 +98,26 @@ function Dice(Props:DiceProps){
             {betting
                 && <div className='dialog'>
                 <form onSubmit={(e) =>bet(e)}>
-                <input className="bet" type="number" onChange={betAmount} placeholder="BET AMOUNT"></input>
+                <input className="bet" type="number" onChange={betAmount} placeholder="BET AMOUNT" required></input>  
+                <button type="submit">BET</button>   
                 </form>
                 <button onClick={() => {setActiveBet(false); setBetting(false)}}>QUIT</button>
                 </div>
                }
+               
             {(!betting && currentBet >0) &&
             <div className='dialog'>
                 <form onSubmit={roll}>
-                <input className="bet" type="number" onChange={(e) => setChoice(parseInt(e.target.value))}min="2" max="12" placeholder="GUESS 2-12"></input>
+                <input className="bet" type="number" onChange={(e) => setChoice(parseInt(e.target.value))}min="2" max="12" placeholder="GUESS 2-12" required></input>
+                {(!betting && currentBet >0 && choice >0) &&
+                    <button type='submit'>ROLL</button>
+                }
                 </form>
+
                 <button onClick={() => {setActiveBet(false); setBet(0)}}>QUIT</button>
                 </div>
             }
+
     </div>
     </div>
     <div className="table">

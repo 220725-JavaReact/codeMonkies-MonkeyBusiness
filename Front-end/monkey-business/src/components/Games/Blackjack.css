@@ -38,10 +38,7 @@
 .hand{
     height: 160px;
 }
-
-.dealer-hand{
-    height: 160px;
-}
+﻿
 .dealer-card{
 	transform: rotate(180deg);
 	height: fit-content;
@@ -68,6 +65,15 @@
 }
 .userMenu img {
     max-width: 50%;
+}
+.userMenuBtn {
+    background-color: black;
+    color: white;
+    border: none;
+    width: 90%;
+    height: 40px;
+    border-radius: 20px;
+    cursor: pointer;
 }
 .gameControls{
     display: flex;
@@ -96,6 +102,10 @@
     color: white;
     font-weight: 900;
     justify-content: center;
+}
+.dialog form {
+    display: flex;
+    flex-direction: column;
 }
 #betDisplay {
     color: rgb(240, 12, 12);
