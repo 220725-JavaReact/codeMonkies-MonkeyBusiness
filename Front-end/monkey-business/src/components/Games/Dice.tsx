@@ -81,7 +81,7 @@ function Dice(Props:DiceProps){
             <img src="https://pluspng.com/img-png/user-png-icon-big-image-png-2240.png" alt="user Icon"/>
             <p>{Props.user.userName}</p>
             <p>Bananas Left: {bananas}</p>
-            <input type="button" value="Return to Game Selection" onClick={()=> {
+            <input className="userMenuBtn" type="button" value="Return to Game Selection" onClick={()=> {
                 Props.setIUser({id:Props.user.id,userName:Props.user.userName,password:Props.user.password,bananas:bananas});
                 Props.setGame("")
                 }}></input>

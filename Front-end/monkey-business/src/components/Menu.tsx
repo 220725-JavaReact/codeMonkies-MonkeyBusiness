@@ -28,7 +28,7 @@ function Menu(Props:MenuProps){
             <img src="https://pluspng.com/img-png/user-png-icon-big-image-png-2240.png" alt="user Icon"/>
             <p>{Props.user.userName}</p>
             <p>Bananas Left: {Props.user.bananas}</p>
-            <button onClick={()=>{
+            <button className="userMenuBtn" onClick={()=>{
                 Props.setLog(false); {saveUserStatus()}
             }}>Log Out</button>
         </div>
