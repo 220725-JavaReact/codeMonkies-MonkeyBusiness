@@ -15,7 +15,7 @@ export const Signup = (Props:signupProp) => {
     const[user, setUser] = useState<IUser>({
         userName: "",
         password: "",
-        bananas: 0
+        bananas: 10000
     });
 
     function updateUserName(event: any) {
