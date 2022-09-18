@@ -184,3 +184,22 @@
 .six .dot:nth-child(n+4){
     transform: translate(3rem ,-5.75rem);
 }
+.chat {
+    width: 400px;
+    height:250px;
+    position: absolute;
+    right:0;
+    z-index: 100;
+    background-color: rgb(0, 0, 0, 0.4);
+    border-bottom: 2px solid rgb(255, 255, 0, 0.6);
+    border-left: 2px solid rgb(255, 255, 0, 0.6);
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    padding-right: 10px;
+    color: white;
+    font-family: monospace;
+}
+.chat p {
+}
