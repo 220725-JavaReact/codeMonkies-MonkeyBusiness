@@ -39,7 +39,9 @@
 .hand{
     height: 160px;
 }
-
+.dealer-hand{
+    height: 160px;
+}
 .dealer-card{
 	transform: rotate(180deg);
 	max-height: 100%;

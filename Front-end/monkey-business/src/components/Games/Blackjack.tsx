@@ -39,6 +39,8 @@ function Blackjack(Props:BlackJackProps){
     // Winners
     const [playerWon, setPlayerWon] = useState(false);
     const [dealerWon, setDealerWon] = useState(false);
+    //chat Dialog
+    const[chat, addChat] = useState<Array<String>>([]);
 
     /**
      * Hit onClick function, draws 1 card, checks player's hand if over 21, or at 21
@@ -82,6 +84,7 @@ function Blackjack(Props:BlackJackProps){
     }
 
     async function dealerGetCard(){
+        // if(dealerHandSum < 17 && dealerHandSum =< 21)
 
         axios.get<ICards>('https://www.deckofcardsapi.com/api/deck/bx1eu5s07ggj/draw/?count=1')
             .then(response => {
@@ -167,6 +170,7 @@ function Blackjack(Props:BlackJackProps){
                     } else{
                         // Game Over
                         console.log("GAME OVER!!! Dealer LOST!!!!");
+                        addChat(["Dealer Lost and Player Won",...chat])
                         setGameOver(true);
                         setDealerWon(true);
                     }
@@ -183,9 +187,11 @@ function Blackjack(Props:BlackJackProps){
 
     function compareHands(){
         if(playerHandSum > dealerHandSum){
+            addChat(["Dealer Lost and Player Won",...chat])
             setGameOver(true);
             setPlayerWon(true);
         }else{
+            addChat(["Player Lost and Dealer Won",...chat])
             setGameOver(true);
             setDealerWon(true);
         }
@@ -400,7 +406,7 @@ function Blackjack(Props:BlackJackProps){
         setPlayerWon(false);
         setDealerWon(false);
         setDealerTurn(false);
-
+        setTurn1(false);
     }
 
     /**
@@ -448,7 +454,7 @@ function Blackjack(Props:BlackJackProps){
                 ) 
             } else{
                 return (
-                    <div>
+                    <div className ="dealer-hand">
                         <img src={'https://deckofcardsapi.com/static/img/' + dealerArrCardCodes[0] + '.png'} alt="dealer card back"  className="card" />
                         <img src={back} alt="dealer card back"  className="card" />
                     </div>
@@ -478,13 +484,24 @@ function Blackjack(Props:BlackJackProps){
             <img src="https://pluspng.com/img-png/user-png-icon-big-image-png-2240.png" alt="user Icon"/>
             <p>{Props.user.userName}</p>
             <p>Bananas Left: {bananas}</p>
+            <input className="userMenuBtn" type="button" value="Return to Game Selection" onClick={()=> {
+                Props.setIUser({id:Props.user.id,userName:Props.user.userName,password:Props.user.password,bananas:bananas});
+                Props.setGame("")
+                }}></input>
+        </div>
+        <div className='chat'>
+            {
+            chat?.map((element) => {
+                return <p>{element}</p>
+            })
+            }
         </div>
         <div className='gameControls'>
             <div className='dialog'>
                 <p>Dealer:</p>
-                <p>DEALER HAND</p>
+                <p>{dealerHandSum}</p>
                 <p>Player:</p>
-                <p>PLAYER NUMBER</p>
+                <p>{playerHandSum}</p>
             </div>
             <div className='dialog'>
 
@@ -493,7 +510,7 @@ function Blackjack(Props:BlackJackProps){
             </div>
     </div>
     </div>
-    {
+    {/* {
         gameOver &&
         <div className='gameOver'>
             <p>
@@ -516,7 +533,7 @@ function Blackjack(Props:BlackJackProps){
             {Props.user.userName} LOST!!
             </p>
         </div>
-    }
+    } */}
     <div className="table">
         <div className="cards">
             <div className ="dealer-hand" id="dealer-cards">
