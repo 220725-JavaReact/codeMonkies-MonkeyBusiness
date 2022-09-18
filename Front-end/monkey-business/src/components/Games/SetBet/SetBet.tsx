@@ -1,7 +1,10 @@
 import { useState } from "react";
 
+type BetProps = {
+    setRealBet(num:number):void
+}
 
-function SetBet() {
+function SetBet(props:BetProps) {
     //the paremeter in useState will determine the default value of this variable
     //bet variable is a state
     const minBet = 5;
@@ -12,6 +15,7 @@ function SetBet() {
     function AddBet() {
 
         setBet(bet + 1);
+        props.setRealBet(bet +1)
         console.log(bet);
     }
 
@@ -21,6 +25,7 @@ function SetBet() {
         
         if(newBet >= minBet){
             setBet(newBet);
+            props.setRealBet(newBet)
         }
 
         console.log(bet);
