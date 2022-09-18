@@ -19,6 +19,7 @@ function Blackjack(Props:BlackJackProps){
 
     // User Fields
     const[bananas, setBananas] = useState<number>(Props.user.bananas);
+    const[playerBet, setPlayerBet] = useState<number>(5);
     // Player Fields
     const[playerArrHandValues, setplayerArrHandValues] = useState<number[]>([]);
     const[playerArrCardCodes, setplayerArrCardCodes] = useState<string[]>([]);
@@ -84,9 +85,8 @@ function Blackjack(Props:BlackJackProps){
     }
 
     async function dealerGetCard(){
-        // if(dealerHandSum < 17 && dealerHandSum =< 21)
-
-        axios.get<ICards>('https://www.deckofcardsapi.com/api/deck/bx1eu5s07ggj/draw/?count=1')
+        if(dealerHandSum < 17){
+            axios.get<ICards>('https://www.deckofcardsapi.com/api/deck/bx1eu5s07ggj/draw/?count=1')
             .then(response => {
                 const currentCards = response.data.cards;
                 const cardValue = getCardValue(String(currentCards[0].value));
@@ -114,6 +114,11 @@ function Blackjack(Props:BlackJackProps){
                     }
                 }
             })
+        } else {
+            compareHands();
+        }
+
+        
     }
 
     /**
@@ -165,14 +170,15 @@ function Blackjack(Props:BlackJackProps){
 
                 if(dealerHandSum > 21){
                     if(checkAceInHandDealer()){
-                        setDealerHandSum(oldSum => oldSum - 10);
+                        // setDealerHandSum(oldSum => oldSum - 10);
                         adjustIfAceInHandPlayer();
                     } else{
                         // Game Over
-                        console.log("GAME OVER!!! Dealer LOST!!!!");
-                        addChat(["Dealer Lost and Player Won",...chat])
-                        setGameOver(true);
-                        setDealerWon(true);
+                        // console.log("GAME OVER!!! Dealer LOST!!!!");
+                        // addChat(["Dealer Lost and Player Won",...chat])
+                        // setGameOver(true);
+                        // setDealerWon(true);
+                        compareHands();
                     }
                 }
                 else{
@@ -186,11 +192,14 @@ function Blackjack(Props:BlackJackProps){
     }, [dealerHandSum, dealerArrHandValues]);
 
     function compareHands(){
-        if(playerHandSum > dealerHandSum){
+        
+        if(playerHandSum > dealerHandSum || dealerHandSum > 21){
             addChat(["Dealer Lost and Player Won",...chat])
             setGameOver(true);
             setPlayerWon(true);
+            setBananas(bananas => bananas + (playerBet*2))
         }else{
+            
             addChat(["Player Lost and Dealer Won",...chat])
             setGameOver(true);
             setDealerWon(true);
@@ -310,6 +319,10 @@ function Blackjack(Props:BlackJackProps){
     function checkAceInHandDealer(){
         for(var i=0; i < dealerArrHandValues.length; i++){
             if(dealerArrHandValues[i] === 11){
+                if(dealerHandSum > 21){
+                    dealerArrHandValues[i] = 1;
+                }
+                
                 return true;
             }
         }
@@ -377,7 +390,7 @@ function Blackjack(Props:BlackJackProps){
     }
 
     // Default Bet set to minimum bet 5 bannanas
-    const playerBet = 5;
+    
     /**
      * Game Starting function:
      *      1) reshuffle Deck, were using deckID: bx1eu5s07ggj
@@ -387,6 +400,9 @@ function Blackjack(Props:BlackJackProps){
     function startGame(){
         
         console.log("=====   Game Has Started!   =====");
+        addChat(["===ROUND START===",...chat]);
+
+        setBananas(bananas => bananas - playerBet)
 
         setGameStart(true);
         reshuffleDeck();
@@ -417,20 +433,17 @@ function Blackjack(Props:BlackJackProps){
     const displayButtons = (
         <div>
             {gameStart ? 
-                    (<div><button onClick={getCard}>Hit</button><button onClick={handleDealerTurn}>Stand</button><button onClick={onCheckConsole}>Check Game Status</button></div>) : 
-                    (<div><SetBet /><button onClick={startGame}>Start Game</button></div>)
+                    (<div className='dialog'><button onClick={getCard}>Hit</button><button onClick={handleDealerTurn}>Stand</button></div>) : 
+                    (<div><SetBet setRealBet={setPlayerBet} /><button onClick={startGame}>Start Game</button></div>)
             }
         </div>
     );
 
     const displayFirstTurnButtons = (
-        <div>
-            <div>
+        <div className="dialog">
                 <button onClick={handleDoubleDown}>Double Down</button>
                 <button onClick={getCard}>Hit</button>
                 <button onClick={handleDealerTurn}>Stand</button>
-                <button onClick={onCheckConsole}>Check Game Status</button>
-            </div>
         </div>
     );
 
@@ -499,7 +512,10 @@ function Blackjack(Props:BlackJackProps){
         <div className='gameControls'>
             <div className='dialog'>
                 <p>Dealer:</p>
-                <p>{dealerHandSum}</p>
+                {dealerTurn ? <p>{dealerHandSum}</p> : <p>?</p>
+
+                }
+                
                 <p>Player:</p>
                 <p>{playerHandSum}</p>
             </div>

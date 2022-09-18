@@ -35,8 +35,8 @@ function Menu(Props:MenuProps){
     </div>
         <div className="menu">
             <button className="menuBtn" onClick={(e)=>Props.setGame("Blackjack")}>Blackjack</button>
-            <button className="menuBtn">Coming Soon</button>
             <button className="menuBtn" onClick={(e)=>Props.setGame("Dice")}>Dice</button>
+            <button className="menuBtn">Coming Soon</button>
             <button className="menuBtn">Coming Soon</button>
         </div>
     </div>
