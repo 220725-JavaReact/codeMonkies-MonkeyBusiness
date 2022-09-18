@@ -34,14 +34,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 .hand{
     height: 160px;
 }
-﻿
+
 .dealer-card{
 	transform: rotate(180deg);
-	height: fit-content;
+	max-height: 100%;
 }
 .card {
     max-height: 100%;
@@ -183,4 +184,27 @@
 }
 .six .dot:nth-child(n+4){
     transform: translate(3rem ,-5.75rem);
+}
+.gameOver {
+    color: rgb(240, 12, 12);
+    font-size: 8rem;
+    text-align: center;
+    background-color: #d5f80d;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.playerWon {
+    color: rgb(240, 12, 12);
+    font-size: 4rem;
+    text-align: center;
+    background-color: #d5f80d;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.dealerWon {
+    color: rgb(240, 12, 12);
+    font-size: 4rem;
+    text-align: center;
+    background-color: #d5f80d;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
