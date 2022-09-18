@@ -22,6 +22,7 @@ function Dice(Props:DiceProps){
     const[d2Class, set2Class] = useState<string>('one');
     const[bananas, setBananas] = useState<number>(Props.user.bananas);
     const[background, setBackground] = useState<string>('blackjack');
+    const[chat, addChat] = useState<Array<String>>([]);
 
     function betAmount(e:any){
         setBet(e.target.value);
@@ -40,12 +41,14 @@ function Dice(Props:DiceProps){
         setDice2(d2);
         setClass(d1, set1Class);
         setClass(d2, set2Class);
+        addChat(["Dealer rolled :"+(d1+d2),...chat])
         if(choice === d1 + d2){
             let newbananas = ((currentBet *2) + bananas);
             setBananas(newbananas);
             console.log(newbananas);
             setBackground('blackjackW');
             setTimeout(win, 2000);
+            addChat(["You won :"+((currentBet *2)),...chat])
         }
     }
     function setClass(num:number,func:Function){
@@ -86,9 +89,18 @@ function Dice(Props:DiceProps){
                 Props.setGame("")
                 }}></input>
         </div>
-        <div className='gameControls'>
+        <div className='chat'>
+            {
+            chat?.map((element) => {
+                return <p>{element}</p>
+            })
             
-
+            // chat?.forEach(element => {
+                
+            // });
+            }
+        </div>
+        <div className='gameControls'>
             {!activeBet
                 && <div className='dialog'>
                 <button id='btn1' onClick={() => {setActiveBet(true); setBetting(true)}}>BET</button>
